@@ -8,6 +8,7 @@
     }
 
     .swiper-slide {
+      position: relative;
       background-position: center;
       background-size: cover;
       width: 300px;
@@ -30,8 +31,30 @@
       border-bottom-left-radius: .6rem;
       border-bottom-right-radius: .6rem;
     }
+    .swiper-slide {
+      /* position: relative;  */
+      /* text-align: center; */
+  }
 
+  /* .slide-button {
+      position: absolute;
+      bottom: 10px;
+      
+      transform: translateX(-50%);
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor:pointer;
+      transition: background-color 0.3s ease;
+  }
 
+  .slide-button:hover {
+      background-color: #0056b3;
+  }
+ */
 
 
 

@@ -16,3 +16,16 @@ var swiper = new Swiper(".mySwiper", {
     },
   });
   
+
+
+  document.querySelectorAll('.slide-button').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent triggering Swiper's drag behavior
+        const targetId = this.getAttribute('data-target');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll
+        }
+    });
+});
