@@ -6,7 +6,6 @@ html, body {
     /* overflow-x: hidden; */
     scroll-behavior: smooth;
     font-family: Arial, sans-serif;
-    /* overflow-x: hidden; */
 }
 
 /* Section Styling */
@@ -21,9 +20,6 @@ html, body {
     text-align: center;
     position: relative;
     overflow: hidden; 
-    /* container-type: inline-size; */
-    /* width:fit-content; */
-    /* flex-wrap:wrap; */
 }
 
 /* Styling for Each Section */
@@ -58,35 +54,13 @@ html, body {
 .section:nth-child(4) {
     background: #ffe5b4; /* Light orange background for section 4 */
     color: #333;
-    object-fit: cover;
-    /* container-type: inline-size; */
-}
-.section:nth-child(5) {
-    background: purple; /* Light orange background for section 4 */
-    color: #333;
-    /* container-type: inline-size; */
 }
 
 /* Heading Styling */
 h1, h2 {
     margin: 0;
-    font-size: 10vw;
-    /* max-width: 100%; */
-   /* width:100svh;
-   width: webkit-fill-available; */
-    /* width:fit-content; */
-    /* overflow-wrap: break-word;  
-    word-wrap: break-word; 
-    white-space: normal; 
-    width: 100vh;  */
+    font-size: 3rem;
 }
-/* . section:nth-child(5)>h1{
-   font-size: 19cqi;
-} */
-/* .section:nth-child(4) > h1 {
-    font-size: 1vw;
-} */
-
 
 /* Leaf Container and Animation */
 .set {
