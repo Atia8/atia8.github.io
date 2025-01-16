@@ -62,9 +62,15 @@ html, body {
     /* container-type: inline-size; */
 }
 .section:nth-child(5) {
-    background: purple; /* Light orange background for section 4 */
+    background:radial-gradient(#333, #000); /* Light orange background for section 4 */
     color: #333;
     /* container-type: inline-size; */
+  
+   
+}
+.section:nth-child(6) {
+    background: #d4edda; 
+    color: #333;
 }
 
 /* Heading Styling */

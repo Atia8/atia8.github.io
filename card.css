@@ -11,7 +11,7 @@
     }
 }
 
-/* Adjust for smaller screens (Mobile/Tablets) */ 
+
 @media (max-width: 768px) {
     .hello img {
         height: 100vh; 

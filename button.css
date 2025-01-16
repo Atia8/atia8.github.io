@@ -94,7 +94,7 @@
 *:before,
 *:after {
   box-sizing: border-box;
-  outline: calc(var(--debug) * 1px) dotted red;
+  outline: calc(var(--debug) * 1px) dotted white;
   outline-offset: -1px;
 }
 
@@ -108,7 +108,7 @@ main {
 }
 
 body {
-  background:red;
+  background:white;
   /* background: var(--body-bg); */
   font-family: "Mona Sans", sans-serif;
   padding: 0 6em;
