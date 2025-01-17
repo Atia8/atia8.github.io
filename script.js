@@ -35,3 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the list on page load
     updateWishList();
 });
+
+

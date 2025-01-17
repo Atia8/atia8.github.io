@@ -1,0 +1,94 @@
+body {
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #121212;
+    background-color: #f0f0f0; 
+    background-color: #444444;  
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+.container {
+    background: linear-gradient(145deg, #1f1f1f, #292929);
+    /* background: linear-gradient(145deg, #3a3a3a, #4e4e4e); */
+    /* background: linear-gradient(145deg, #333, #000); */
+
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.6), -8px -8px 20px rgba(255, 255, 255, 0.1);
+    
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+.container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(100px,#333, #000);
+    
+    z-index: -1;
+    filter: blur(20px);
+}
+.alert {
+    display: none;
+    background: linear-gradient(145deg, #4caf50, #3e8e41);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+.inputBox {
+    margin-bottom: 20px;
+    position: relative;
+}
+.inputBox input, .inputBox textarea {
+    width: 100%;
+    padding: 15px;
+    background: #1e1e1e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset -5px -5px 10px rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+}
+.inputBox input::placeholder, .inputBox textarea::placeholder {
+    color: #aaa;
+}
+.inputBox button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(145deg, #ff512f, #dd2476);
+    background: linear-gradient(145deg, #007f7e, #00cc99, #1ac0a4);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5), -4px -4px 15px rgba(255, 255, 255, 0.1);
+}
+.inputBox button:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.5), -6px -6px 20px rgba(255, 255, 255, 0.2);
+}
+.inputBox button:active {
+    transform: translateY(3px);
+    box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.5), inset -4px -4px 10px rgba(255, 255, 255, 0.1);
+}
