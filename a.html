@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Catch Game</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        #menu, #game-over {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <h1>Flower Catch Game</h1>
+        <p>Select a timer to start:</p>
+        <button onclick="startGame(30)">30 Seconds</button>
+        <button onclick="startGame(60)">60 Seconds</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div id="game-over" style="display: none;">
+        <h2>Game Over</h2>
+        <p>Your Bouquet is ready!</p>
+        <canvas id="bouquetCanvas" width="400" height="400"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const menu = document.getElementById('menu');
+        const gameOverScreen = document.getElementById('game-over');
+        const bouquetCanvas = document.getElementById('bouquetCanvas');
+        const bouquetCtx = bouquetCanvas.getContext('2d');
+
+        let flowers = [];
+        let caughtFlowers = []; // Store caught flowers
+        let basketX = canvas.width / 2;
+        const basketWidth = 100;
+        const basketHeight = 20;
+        let score = 0;
+        let timer = 0;
+        let gameActive = false;
+
+        const flowerImage = new Image();
+        flowerImage.src = 'flower.png'; // Replace with your flower image path
+        const basketImage = new Image();
+        basketImage.src = 'basket.png'; // Replace with your basket image path
+        const paperImage = new Image();
+        paperImage.src = 'paper.png'; // Replace with your paper image path for the bouquet
+
+        class Flower {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = 30;
+                this.speed = Math.random() * 2 + 1;
+            }
+            draw() {
+                ctx.drawImage(flowerImage, this.x, this.y, this.size, this.size);
+            }
+            update() {
+                this.y += this.speed;
+            }
+        }
+
+        function startGame(selectedTime) {
+            menu.style.display = 'none';
+            gameActive = true;
+            timer = selectedTime;
+            score = 0;
+            flowers = [];
+            caughtFlowers = [];
+            
+            setInterval(() => {
+                if (gameActive && timer > 0) {
+                    timer--;
+                } else if (timer === 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            setInterval(() => {
+                if (gameActive) {
+                    const x = Math.random() * canvas.width;
+                    flowers.push(new Flower(x, 0));
+                }
+            }, 500);
+
+            gameLoop();
+        }
+
+        function endGame() {
+            gameActive = false;
+            menu.style.display = 'none';
+            gameOverScreen.style.display = 'flex';
+
+            // Draw bouquet
+            bouquetCtx.clearRect(0, 0, bouquetCanvas.width, bouquetCanvas.height);
+            bouquetCtx.drawImage(paperImage, 0, 0, bouquetCanvas.width, bouquetCanvas.height);
+            
+            let offsetX = 50; // Initial X position for flowers
+            let offsetY = 200; // Initial Y position for flowers
+            caughtFlowers.forEach((flower, index) => {
+                bouquetCtx.drawImage(flowerImage, offsetX, offsetY, flower.size, flower.size);
+                offsetX += 50; // Shift flowers horizontally
+                if ((index + 1) % 5 === 0) { // Move to next row after 5 flowers
+                    offsetX = 50;
+                    offsetY -= 50;
+                }
+            });
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            basketX = e.clientX - basketWidth / 2;
+        });
+
+        function gameLoop() {
+            if (!gameActive) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            flowers.forEach((flower, index) => {
+                flower.update();
+                flower.draw();
+
+                if (
+                    flower.y + flower.size > canvas.height - basketHeight &&
+                    flower.y < canvas.height &&
+                    flower.x + flower.size > basketX &&
+                    flower.x < basketX + basketWidth
+                ) {
+                    flowers.splice(index, 1);
+                    caughtFlowers.push(flower); // Add flower to bouquet
+                    score++;
+                }
+
+                if (flower.y > canvas.height) {
+                    flowers.splice(index, 1);
+                }
+            });
+
+            ctx.drawImage(basketImage, basketX, canvas.height - basketHeight, basketWidth, basketHeight);
+
+            requestAnimationFrame(gameLoop);
+        }
+    </script>
+</body>
+</html>

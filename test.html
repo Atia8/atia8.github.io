@@ -1,94 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Car and Map Animation</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #87ceeb; /* Sky blue */
-      overflow: hidden;
-    }
-
-    .road {
-      position: relative;
-      width: 100%;
-      height: 150px;
-      background: linear-gradient(to bottom, #444, #333);
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .gap {
-      position: absolute;
-      width: 200px;
-      height: 150px;
-      background: transparent;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .car {
-      position: absolute;
-      width: 100px;
-      height: 50px;
-      background: red;
-      border-radius: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: left 2s linear;
-    }
-
-    .map-popup {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background: white;
-      border: 2px solid black;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      display: none;
-      left: calc(50% + 60px);
-      top: calc(50% - 200px);
-    }
-
-    .map-popup img {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Wishes</title>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <div class="road">
-    <div class="gap"></div>
-    <div class="car"></div>
-    <div class="map-popup">
-      <img src="https://via.placeholder.com/120?text=MAP" alt="Map">
-    </div>
-  </div>
+    <h1>Guest Wishes</h1>
+    <form id="wishForm">
+        <label for="name">Name (optional):</label><br>
+        <input type="text" id="name" placeholder="Your Name"><br><br>
+        <label for="message">Your Wish/Advice:</label><br>
+        <textarea id="message" rows="4" cols="50" placeholder="Enter your wish or advice"></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
 
-  <script>
-    const car = document.querySelector('.car');
-    const mapPopup = document.querySelector('.map-popup');
+    <h2>Wishes from Guests:</h2>
+    <ul id="wishesList"></ul>
 
-    // Animate car
-    setTimeout(() => {
-      car.style.left = '45%'; // Moves to the gap
-    }, 1000);
+    <script>
+        // Firebase configuration
+      // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA-GQk4JnC1RzOi64-bAHfvbElzwZpGW3M",
+  authDomain: "apiii-9327a.firebaseapp.com",
+  databaseURL: "https://apiii-9327a-default-rtdb.firebaseio.com",
+  projectId: "apiii-9327a",
+  storageBucket: "apiii-9327a.firebasestorage.app",
+  messagingSenderId: "814962191443",
+  appId: "1:814962191443:web:c616c771be7d25073e2aa6"
+};
 
-    // Show map popup
-    setTimeout(() => {
-      car.style.left = '45%'; // Stops at the gap
-      mapPopup.style.display = 'block'; // Shows map
-    }, 3000);
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-    // Resume car journey
-    setTimeout(() => {
-      mapPopup.style.display = 'none'; // Hides map
-      car.style.left = '80%'; // Car resumes journey
-    }, 5000);
-  </script>
+        // Form submission
+        document.getElementById('wishForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value || 'Anonymous';
+            const message = document.getElementById('message').value;
+
+            if (!message.trim()) {
+                alert('Please enter a message!');
+                return;
+            }
+
+            // Push data to Firebase Realtime Database
+            try {
+                const newWishRef = db.ref('wishes').push();
+                await newWishRef.set({ name, message });
+                document.getElementById('wishForm').reset();
+                fetchWishes();
+            } catch (error) {
+                console.error('Error saving wish:', error);
+            }
+        });
+
+        // Fetch and display wishes
+        function fetchWishes() {
+            const wishesList = document.getElementById('wishesList');
+            wishesList.innerHTML = '';
+            db.ref('wishes').on('value', (snapshot) => {
+                const wishes = snapshot.val();
+                if (wishes) {
+                    Object.values(wishes).forEach(({ name, message }) => {
+                        const li = document.createElement('li');
+                        li.textContent = `${name}: ${message}`;
+                        wishesList.appendChild(li);
+                    });
+                }
+            });
+        }
+
+        // Load wishes on page load
+        fetchWishes();
+    </script>
 </body>
 </html>
