@@ -74,17 +74,30 @@ html, body {
 }
 
 /* Heading Styling */
-h1, h2 {
+h1,h2
+{
     margin: 0;
     font-size: 10vw;
-    /* max-width: 100%; */
-   /* width:100svh;
-   width: webkit-fill-available; */
-    /* width:fit-content; */
-    /* overflow-wrap: break-word;  
-    word-wrap: break-word; 
-    white-space: normal; 
-    width: 100vh;  */
+}
+
+
+
+ h2 {
+    /* margin: 0;
+    font-size: 10vw; */
+    font-family: 'Cormorant Garamond', serif; /* Elegant serif font */
+    font-size: 2.5rem; /* Adjust size */
+    font-weight: 700; /* Bold text */
+    color: #D2691E; /* Warm, autumnal brown color */
+   
+    text-align: center; /* Center the text */
+
+    /* Text Effects */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0 0 10px rgba(210, 105, 30, 0.5); /* Shadow for glow */
+    letter-spacing: 2px; /* Slight spacing for elegance */
+    text-transform: capitalize; /* Title case */
+
+    
 }
 /* . section:nth-child(5)>h1{
    font-size: 19cqi;

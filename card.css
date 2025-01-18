@@ -21,7 +21,7 @@
 
 .download-button {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(to right, #5a5a5a, #1e1e1e, #5a5a5a); /* Subtle metallic gradient */
