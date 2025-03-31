@@ -56,8 +56,10 @@ html, body {
 }
 
 .section:nth-child(4) {
-    background: #ffe5b4; /* Light orange background for section 4 */
-    color: #333;
+    background: radial-gradient(#333, #000); /* Dark background for section 1 */
+    color: #fff;
+    /* background: #ffe5b4; 
+    color: #333; */
     object-fit: cover;
     /* container-type: inline-size; */
 }
